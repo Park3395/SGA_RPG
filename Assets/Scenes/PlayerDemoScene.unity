@@ -510,9 +510,9 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 951837347}
-        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: PlayerInputAction, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -524,16 +524,56 @@ MonoBehaviour:
     m_ActionId: e6e94cb1-e453-47e2-911d-155d1ac28d6a
     m_ActionName: Move/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 951837347}
+        m_TargetAssemblyTypeName: PlayerInputValue, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bae4c6ab-c8fe-4132-a760-b27eb1f7c422
     m_ActionName: Move/New action
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 951837347}
+        m_TargetAssemblyTypeName: PlayerInputValue, Assembly-CSharp
+        m_MethodName: OnSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ee75ea44-97c3-4927-b4a1-e82893a6ca06
     m_ActionName: Move/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 951837347}
+        m_TargetAssemblyTypeName: PlayerInputValue, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e4f00ff0-83f8-4132-a39d-098a8c290b01
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
-  m_DefaultActionMap: Move
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &951837347
@@ -552,6 +592,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  LockedCursor: 1
 --- !u!1 &1565166690
 GameObject:
   m_ObjectHideFlags: 0
