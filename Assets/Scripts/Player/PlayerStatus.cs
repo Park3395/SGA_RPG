@@ -20,7 +20,7 @@ public class PlayerStatus : MonoBehaviour
     #region General Status
 
     // 이동 속도
-    private float _movespeed = 2.0f;
+    private float _movespeed = 4.0f;
     public float movespeed { get { return _movespeed; } }
     // 가속도
     private float _acceleration = 10.0f;
@@ -51,6 +51,12 @@ public class PlayerStatus : MonoBehaviour
     private float _groundRadius;
     public float groundRadius { get { return _groundRadius; } set { _groundRadius = value; } }
 
+    // 카메라 위쪽 각도 제한
+    public float camTopClamp = 50.0f;
+    // 카메라 아래쪽 각도 제한
+    public float camBottomClamp = -70.0f;
+    // 카메라 속도
+    public float camSpeed = 2.0f;
 
     #endregion
 }

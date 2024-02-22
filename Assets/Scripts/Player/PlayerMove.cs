@@ -31,6 +31,17 @@ public class PlayerMove : MonoBehaviour
     // 낙하 시간
     private float fallingTime;
 
+    // 스레드홀드
+    private float threshold = 0.01f;
+
+    // 카메라 y 각
+    private float camTargetY;
+    // 카메라 pitch
+    private float camTargetPitch;
+    // 카메라 타겟
+    public GameObject camTarget;
+
+
     private void Start()
     {
         cc = GetComponent<CharacterController>();
@@ -108,26 +119,30 @@ public class PlayerMove : MonoBehaviour
  
         // 입력 값이 없는 경우 이동 정지
         if(pValue.move == Vector2.zero)
-            targetSpeed = 0;
+            targetSpeed = 0f;
 
         // 현재 이동중인 속도
         float currentSpeed = new Vector3(cc.velocity.x, 0f, cc.velocity.z).magnitude;
         // 이동 속도 연산 오프셋
         float speedOffset = 0.1f;
+        float inputMagnitude = 1.0f;
 
         // 현재 이동하고 있는 속도가 입력된 속도와 차이가 있는 경우 가속, 감속 연산 실행
         if (currentSpeed < targetSpeed - speedOffset ||
             currentSpeed > targetSpeed + speedOffset)
         {
-            this.speed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * pStat.acceleration);
+            this.speed = Mathf.Lerp(currentSpeed, targetSpeed * inputMagnitude
+                , Time.deltaTime * pStat.acceleration);
             speed = Mathf.Round(speed * 1000f) / 1000f;
         }
         // 아닐 경우 입력된 이동 속도로 초기화
         else
+        {
             speed = targetSpeed;
+        }
 
         // 애니메이션 blend 수치 조정
-        moveBlend = Mathf.Lerp(moveBlend,targetSpeed,Time.deltaTime*pStat.acceleration);
+        moveBlend = Mathf.Lerp(moveBlend, targetSpeed, Time.deltaTime * pStat.acceleration);
         if (moveBlend < 0.01f) moveBlend = 0f;
 
         #endregion
@@ -143,9 +158,10 @@ public class PlayerMove : MonoBehaviour
         {
             rotation = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg 
                 + Camera.main.transform.eulerAngles.y;
-            float nowrot = Mathf.SmoothDampAngle(this.transform.eulerAngles.y, rotation, ref rotSpeed, pStat.rotSmoothTime);
+            float nowrot = Mathf.SmoothDampAngle(this.transform.eulerAngles.y, rotation, 
+                ref rotSpeed, pStat.rotSmoothTime);
 
-            transform.rotation = Quaternion.Euler(0f,nowrot,0);
+            transform.rotation = Quaternion.Euler(0f, nowrot, 0f);
         }
 
         Vector3 targetDir = Quaternion.Euler(0f, rotation, 0f) * Vector3.forward;
@@ -160,6 +176,22 @@ public class PlayerMove : MonoBehaviour
 
     private void CamRotate()
     {
+        if(pValue.look.sqrMagnitude >= threshold)
+        {
+            camTargetY += pValue.look.x * pStat.camSpeed;
+            camTargetPitch += pValue.look.y * pStat.camSpeed;
+        }
 
+        camTargetY = ClampAngle(camTargetY,float.MinValue,float.MaxValue);
+        camTargetPitch = ClampAngle(camTargetPitch,pStat.camBottomClamp,pStat.camTopClamp);
+
+        camTarget.transform.rotation = Quaternion.Euler(camTargetPitch, camTargetY, 0f);
+    }
+
+    private static float ClampAngle(float angle,float min,float max)
+    {
+        if (angle < -360f) angle += 360f;
+        if (angle > 360f) angle -= 360f;
+        return Mathf.Clamp(angle, min, max);
     }
 }
