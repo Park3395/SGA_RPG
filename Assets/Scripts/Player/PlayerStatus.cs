@@ -7,10 +7,10 @@ public class PlayerStatus : MonoBehaviour
 {
     #region Action Status
 
-    private int _hp;
+    private int _hp = 100;
     public int hp { get { return _hp; } set { _hp = value; } }
 
-    private int _maxhp;
+    private int _maxhp = 100;
     public int maxHp { get { return _maxhp; } set { _maxhp = value; } }
 
     #endregion
@@ -32,7 +32,7 @@ public class PlayerStatus : MonoBehaviour
     public float rotSmoothTime { get { return _rotSmoothTime; } set { _rotSmoothTime = value; } }
 
     // 점프높이
-    private float _jumpheight = 1.2f;
+    private float _jumpheight = 3.0f;
     public float jumpheight { get { return _jumpheight; } set { _jumpheight = value; } }
     
     // 최대 낙하 가속도
@@ -44,11 +44,11 @@ public class PlayerStatus : MonoBehaviour
     public float gravity { get { return _gravity; } set { _gravity = value; } }
 
     // 지면 감지 오프셋
-    private float _groundOffset;
+    private float _groundOffset = 0.86f;
     public float groundOffeset { get { return _groundOffset; } set { _groundOffset = value;} }
-    
+
     // 지면 감지 범위
-    private float _groundRadius;
+    private float _groundRadius = 0.28f;
     public float groundRadius { get { return _groundRadius; } set { _groundRadius = value; } }
 
     // 카메라 위쪽 각도 제한

@@ -10,7 +10,8 @@ public class PlayerMove : MonoBehaviour
     CharacterController cc;
     PlayerInputValue pValue;
     PlayerStatus pStat;
-    
+    Animator pAnim;
+
     // 현재 땅에 닿아있는지 검사
     private bool isGrounded = true;
     // 땅으로 인식할 레이어
@@ -47,6 +48,7 @@ public class PlayerMove : MonoBehaviour
         cc = GetComponent<CharacterController>();
         pValue = GetComponent<PlayerInputValue>();
         pStat = GetComponent<PlayerStatus>();
+        pAnim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -65,9 +67,10 @@ public class PlayerMove : MonoBehaviour
     {
         Vector3 spherepos = new Vector3(this.transform.position.x, 
             this.transform.position.y - pStat.groundOffeset, transform.position.z);
-        isGrounded = Physics.CheckSphere(spherepos, pStat.groundRadius, groundLayer, 
+        isGrounded = Physics.CheckSphere(spherepos, pStat.groundRadius, groundLayer,
             QueryTriggerInteraction.Ignore);
 
+        pAnim.SetBool("Grounded",isGrounded);
         // 땅일 경우와 공중일 경우 애니메이션 지정
     }
 
@@ -77,8 +80,9 @@ public class PlayerMove : MonoBehaviour
         {
             fallingTime = 0;
 
-            // 점프 애니메이션 정지
-            // 낙하 애니메이션 정지
+            // 점프 & 낙하 애니메이션 중지
+            pAnim.SetBool("Jump", false);
+            pAnim.SetBool("Falling", false);
 
             // 땅에 착지했을 경우 낙하 중지
             if (verticalSpeed < 0.0f)
@@ -90,6 +94,7 @@ public class PlayerMove : MonoBehaviour
                 verticalSpeed = Mathf.Sqrt(pStat.jumpheight * -2f * pStat.gravity);
 
                 // 점프 애니메이션 실행
+                pAnim.SetBool("Jump", true);
             }
         }
         else
@@ -100,6 +105,7 @@ public class PlayerMove : MonoBehaviour
             if(fallingTime >= 0.5f)
             {
                 //낙하 애니메이션 실행
+                pAnim.SetBool("Falling", true);
             }
 
             // 공중일 경우 점프 불가능
@@ -172,6 +178,7 @@ public class PlayerMove : MonoBehaviour
             + new Vector3(0f, verticalSpeed, 0f) * Time.deltaTime);
 
         // 캐릭터 animator 파라미터 수정
+        pAnim.SetFloat("Speed",moveBlend);
     }
 
     private void CamRotate()
