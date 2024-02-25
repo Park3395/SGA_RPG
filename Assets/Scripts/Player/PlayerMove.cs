@@ -32,6 +32,8 @@ public class PlayerMove : MonoBehaviour
     // 낙하 시간
     private float fallingTime;
 
+    private bool isDodge = false;
+
     // 스레드홀드
     private float threshold = 0.01f;
 
@@ -101,8 +103,9 @@ public class PlayerMove : MonoBehaviour
         {
             // 체공 시간 계산
             fallingTime += Time.deltaTime;
+            pAnim.SetFloat("FallingTime",fallingTime);
 
-            if(fallingTime >= 0.5f)
+            if(fallingTime >= 0.3f)
             {
                 //낙하 애니메이션 실행
                 pAnim.SetBool("Falling", true);
@@ -114,6 +117,35 @@ public class PlayerMove : MonoBehaviour
 
         if (verticalSpeed < pStat.fallingVelocity)
             verticalSpeed += pStat.gravity * Time.deltaTime;
+    }
+
+    private void Dodge()
+    {
+        if(isGrounded)
+        {
+            pAnim.SetBool("inDodge", pValue.dodge);
+
+            if(pValue.dodge)
+            {
+                if (!isDodge)
+                {
+                    speed = pStat.movespeed * 15f;
+                    isDodge = true;
+                }
+            }
+        }
+
+        if(isDodge)
+        {
+            // 회피중인 경우 점프 불가능
+            pValue.jump = false;
+            // 회피중인 경우 충돌 판정 무시
+            cc.detectCollisions = false;
+        }
+        else
+        {
+            cc.detectCollisions = true;
+        }
     }
 
     private void MoveAndRotate()
@@ -145,7 +177,10 @@ public class PlayerMove : MonoBehaviour
         else
         {
             speed = targetSpeed;
+            isDodge = false;
         }
+
+        Dodge();
 
         // 애니메이션 blend 수치 조정
         moveBlend = Mathf.Lerp(moveBlend, targetSpeed, Time.deltaTime * pStat.acceleration);

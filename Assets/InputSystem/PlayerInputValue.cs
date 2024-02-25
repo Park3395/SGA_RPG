@@ -9,6 +9,7 @@ public class PlayerInputValue : MonoBehaviour
     public Vector2 look;
     public bool jump;
     public bool sprint;
+    public bool dodge;
 
     public bool LockedCursor = true;
 
@@ -32,10 +33,15 @@ public class PlayerInputValue : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext context)
     {
+        sprint = !sprint;
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
         if (context.performed)
-            sprint = true;
+            dodge = true;
         else
-            sprint = false;
+            dodge = false;
     }
 
     private void OnApplicationFocus(bool focus)
