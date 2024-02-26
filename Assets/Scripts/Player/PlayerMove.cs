@@ -29,10 +29,18 @@ public class PlayerMove : MonoBehaviour
     // 회전 속도
     private float rotSpeed;
 
+
+    public bool jumpDelay;
     // 낙하 시간
     private float fallingTime;
+    // 낙하 데미지 최소 값
+    private float minFallingDamageTime = 3f;
 
-    private bool isDodge = false;
+    // 회피 트리거
+    public bool isDodge = false;
+    // 회피 쿨타임
+    private float dodgeDelay;
+
 
     // 스레드홀드
     private float threshold = 0.01f;
@@ -44,6 +52,7 @@ public class PlayerMove : MonoBehaviour
     // 카메라 타겟
     public GameObject camTarget;
 
+    public bool isStopped = false;
 
     private void Start()
     {
@@ -55,6 +64,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        StopCheck();
         Jump();
         GroundCheck();
         MoveAndRotate();
@@ -65,15 +75,30 @@ public class PlayerMove : MonoBehaviour
         CamRotate();
     }
 
+    private void StopCheck()
+    {
+        if(isStopped)
+        {
+            pValue.StopInput();
+        }
+    }
+
     private void GroundCheck()
     {
-        Vector3 spherepos = new Vector3(this.transform.position.x, 
+        Vector3 spherepos = new Vector3(this.transform.position.x,
             this.transform.position.y - pStat.groundOffeset, transform.position.z);
         isGrounded = Physics.CheckSphere(spherepos, pStat.groundRadius, groundLayer,
             QueryTriggerInteraction.Ignore);
 
+        if (isGrounded)
+        {
+            if(fallingTime >= minFallingDamageTime)
+            {
+                this.isStopped = true;
+            }
+        }
+
         pAnim.SetBool("Grounded",isGrounded);
-        // 땅일 경우와 공중일 경우 애니메이션 지정
     }
 
     private void Jump()
@@ -91,9 +116,11 @@ public class PlayerMove : MonoBehaviour
                 verticalSpeed = -2f;
 
             // 점프 실행
-            if(pValue.jump)
+            if(pValue.jump && !jumpDelay)
             {
                 verticalSpeed = Mathf.Sqrt(pStat.jumpheight * -2f * pStat.gravity);
+
+                jumpDelay = true;
 
                 // 점프 애니메이션 실행
                 pAnim.SetBool("Jump", true);
@@ -103,12 +130,15 @@ public class PlayerMove : MonoBehaviour
         {
             // 체공 시간 계산
             fallingTime += Time.deltaTime;
-            pAnim.SetFloat("FallingTime",fallingTime);
 
             if(fallingTime >= 0.3f)
             {
                 //낙하 애니메이션 실행
                 pAnim.SetBool("Falling", true);
+            }
+            if(fallingTime >= minFallingDamageTime)
+            {
+                pAnim.SetBool("LargeFall", true);
             }
 
             // 공중일 경우 점프 불가능
@@ -121,18 +151,30 @@ public class PlayerMove : MonoBehaviour
 
     private void Dodge()
     {
-        if(isGrounded)
-        {
-            pAnim.SetBool("inDodge", pValue.dodge);
+        if(dodgeDelay != 0)
+            dodgeDelay -= Time.deltaTime;
 
-            if(pValue.dodge)
+        pAnim.SetBool("inDodge", false);
+
+        if(isGrounded && !jumpDelay)
+        {
+            if(pValue.dodge & dodgeDelay <= 0)
             {
                 if (!isDodge)
                 {
-                    speed = pStat.movespeed * 15f;
+                    speed = pStat.movespeed * 8f;
+                    
                     isDodge = true;
+                    jumpDelay = true;
+                    dodgeDelay = pStat.dodgeDelay;
+
+                    pAnim.SetBool("inDodge", true);
                 }
             }
+        }
+        else
+        {
+                pAnim.SetBool("inDodge", pValue.dodge);
         }
 
         if(isDodge)
@@ -170,14 +212,13 @@ public class PlayerMove : MonoBehaviour
             currentSpeed > targetSpeed + speedOffset)
         {
             this.speed = Mathf.Lerp(currentSpeed, targetSpeed * inputMagnitude
-                , Time.deltaTime * pStat.acceleration);
+                , isDodge ? 0.05f : Time.deltaTime * pStat.acceleration);
             speed = Mathf.Round(speed * 1000f) / 1000f;
         }
         // 아닐 경우 입력된 이동 속도로 초기화
         else
         {
             speed = targetSpeed;
-            isDodge = false;
         }
 
         Dodge();
@@ -195,7 +236,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 inputDir = new Vector3(pValue.move.x,0f,pValue.move.y).normalized;
 
         // 입력 값이 0이 아닌 경우 회전 방향 설정
-        if(pValue.move != Vector2.zero)
+        if(pValue.move != Vector2.zero && !isDodge)
         {
             rotation = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg 
                 + Camera.main.transform.eulerAngles.y;

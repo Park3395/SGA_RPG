@@ -13,6 +13,15 @@ public class PlayerInputValue : MonoBehaviour
 
     public bool LockedCursor = true;
 
+    public void StopInput()
+    {
+        move = Vector2.zero;
+        look = Vector2.zero;
+        jump = false;
+        sprint = false;
+        dodge = false;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();

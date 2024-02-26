@@ -26,9 +26,12 @@ public class PlayerStatus : MonoBehaviour
     private float _acceleration = 10.0f;
     public float acceleration { get { return _acceleration; } set { _acceleration = value; } }
 
+    // 회피 딜레이
+    private float _dodgeDelay = 1.0f;
+    public float dodgeDelay { get { return _dodgeDelay; } }
 
     // 회전 속도
-    private float _rotSmoothTime = 0.12f;
+    private float _rotSmoothTime = 0.08f;
     public float rotSmoothTime { get { return _rotSmoothTime; } set { _rotSmoothTime = value; } }
 
     // 점프높이
