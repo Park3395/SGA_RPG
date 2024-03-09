@@ -207,6 +207,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "4d732f84-9dd5-45bd-9cac-f2abe7f2de03",
+            "actions": [
+                {
+                    "name": "Weapon Tap",
+                    "type": "Button",
+                    "id": "6ca0c6e2-70eb-4b52-ba67-d1be9439cc4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c22235e6-c8f8-4f77-94c4-35c97779636b",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Weapon Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

@@ -21,25 +21,23 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WeaponCanvas_Tap_05
-  m_Shader: {fileID: 4800000, guid: b7839dad95683814aa64166edc107ae2, type: 3}
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _ALPHAPREMULTIPLY_ON
   - _ALPHATEST_ON
   - _COLORADDSUBDIFF_ON
   - _EMISSION
-  - _NORMALMAP
+  - _FLIPBOOKBLENDING_OFF
   - _RECEIVE_SHADOWS_OFF
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
-  - _FLIPBOOKBLENDING_OFF
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - DepthOnly
   - SHADOWCASTER
@@ -48,11 +46,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 8af03ca2b83ee4c4ab4647813183e018, type: 3}
+        m_Texture: {fileID: 2800000, guid: 743d71790df6c3b4d90f629a88d21580, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 615b81f3775abf143b06ce0168af1f27, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -68,11 +66,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 615b81f3775abf143b06ce0168af1f27, type: 3}
+        m_Texture: {fileID: 2800000, guid: a166f590a95fe754e8854329ae51c789, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7bf8a62dac4d0b54cb9727922458b0af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -133,6 +131,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _InvFade: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -151,11 +150,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 1, b: 0.09174347, a: 1}
+    - _BaseColor: {r: 0.4811321, g: 0.18418336, b: 0, a: 1}
     - _BaseColorAddSubDiff: {r: -1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0, g: 1, b: 0.09174347, a: 1}
-    - _EmissionColor: {r: 0.38614964, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.4811321, g: 0.18418336, b: 0, a: 1}
+    - _EmissionColor: {r: 1.5849056, g: 1.5849056, b: 1.5849056, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TintColor: {r: 0.41509432, g: 0.32421038, b: 0.22516909, a: 0.5}
   m_BuildTextureStacks: []
