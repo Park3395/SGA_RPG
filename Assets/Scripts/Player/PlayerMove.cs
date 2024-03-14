@@ -259,14 +259,17 @@ public class PlayerMove : MonoBehaviour
 
     private void CamRotate()
     {
-        if(pValue.look.sqrMagnitude >= threshold)
+        if (!pValue.UIOpened)
         {
-            camTargetY += pValue.look.x * pStat.camSpeed;
-            camTargetPitch += pValue.look.y * pStat.camSpeed;
+            if (pValue.look.sqrMagnitude >= threshold)
+            {
+                camTargetY += pValue.look.x * pStat.camSpeed;
+                camTargetPitch += pValue.look.y * pStat.camSpeed;
+            }
         }
 
-        camTargetY = ClampAngle(camTargetY,float.MinValue,float.MaxValue);
-        camTargetPitch = ClampAngle(camTargetPitch,pStat.camBottomClamp,pStat.camTopClamp);
+        camTargetY = ClampAngle(camTargetY, float.MinValue, float.MaxValue);
+        camTargetPitch = ClampAngle(camTargetPitch, pStat.camBottomClamp, pStat.camTopClamp);
 
         camTarget.transform.rotation = Quaternion.Euler(camTargetPitch, camTargetY, 0f);
     }

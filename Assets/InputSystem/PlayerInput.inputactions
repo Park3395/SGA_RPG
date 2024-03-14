@@ -49,6 +49,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponUI",
+                    "type": "Button",
+                    "id": "a3f67e94-a3d1-4e13-8b9f-2a5b40f2b50a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftClick",
+                    "type": "Button",
+                    "id": "4b99041e-41c2-444e-a484-aea23f938997",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -205,32 +223,26 @@
                     "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "UI",
-            "id": "4d732f84-9dd5-45bd-9cac-f2abe7f2de03",
-            "actions": [
-                {
-                    "name": "Weapon Tap",
-                    "type": "Button",
-                    "id": "6ca0c6e2-70eb-4b52-ba67-d1be9439cc4c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "c22235e6-c8f8-4f77-94c4-35c97779636b",
+                    "id": "76b7559a-51c1-45e7-bfb2-ed31489fb863",
                     "path": "<Keyboard>/tab",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Weapon Tap",
+                    "action": "WeaponUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0803c18f-375a-42c2-965a-df953211d816",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "LeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

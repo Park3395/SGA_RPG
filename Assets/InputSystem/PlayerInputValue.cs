@@ -11,6 +11,11 @@ public class PlayerInputValue : MonoBehaviour
     public bool sprint;
     public bool dodge;
 
+    public bool UIOpened;
+    public bool exitUI;
+
+    public bool leftclick;
+
     public bool LockedCursor = true;
 
     public void StopInput()
@@ -51,6 +56,27 @@ public class PlayerInputValue : MonoBehaviour
             dodge = true;
         else
             dodge = false;
+    }
+
+    public void OnTap(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            UIOpened = true;
+        else
+            UIOpened = false;
+
+        if (context.canceled)
+            exitUI = true;
+        else
+            exitUI = false;
+    }
+
+    public void OnLeftClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            leftclick = true;
+        else
+            leftclick = false;
     }
 
     private void OnApplicationFocus(bool focus)

@@ -13,6 +13,9 @@ public class PlayerStatus : MonoBehaviour
     private int _maxhp = 100;
     public int maxHp { get { return _maxhp; } set { _maxhp = value; } }
 
+    private bool[] _isWeaponed = new bool[6];
+    public bool[] isWeaponed { get { return _isWeaponed; } set { _isWeaponed = value; } }
+
     #endregion
 
 
