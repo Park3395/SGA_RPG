@@ -60,9 +60,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftClick",
+                    "name": "LeftClick/Normal",
                     "type": "Button",
                     "id": "4b99041e-41c2-444e-a484-aea23f938997",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftClilck/Charge",
+                    "type": "Button",
+                    "id": "ca2eddd5-0682-44dc-b6dc-0ab44b074ca1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightClick/Special",
+                    "type": "Button",
+                    "id": "64635491-55cc-4b46-b813-ecbc668b8e43",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ultimate",
+                    "type": "Button",
+                    "id": "49ae7d18-75c5-4257-b8f8-d5784918f2b1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -242,7 +269,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "LeftClick",
+                    "action": "LeftClick/Normal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "920f0b36-3954-4de5-a84c-9241becd090d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "RightClick/Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f81ea0e-1ebd-419d-b05c-bdbec6481cfb",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Ultimate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfb5615a-be17-4dca-b982-abab89cc6365",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "LeftClilck/Charge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

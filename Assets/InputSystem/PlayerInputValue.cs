@@ -14,9 +14,13 @@ public class PlayerInputValue : MonoBehaviour
     public bool UIOpened;
     public bool exitUI;
 
-    public bool leftclick;
+    public bool norAtk;
+    public bool chgAtk;
+    public bool spcAtk;
+    public bool ultAtk;
 
     public bool LockedCursor = true;
+    public bool onAction = false;
 
     public void StopInput()
     {
@@ -74,9 +78,35 @@ public class PlayerInputValue : MonoBehaviour
     public void OnLeftClick(InputAction.CallbackContext context)
     {
         if (context.performed)
-            leftclick = true;
+            norAtk = true;
         else
-            leftclick = false;
+            norAtk = false;
+    }
+
+    public void OnCharge(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            chgAtk = true;
+        }
+        else
+            chgAtk = false;
+    }
+
+    public void onRightClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            spcAtk = true;
+        else
+            spcAtk = false;
+    }
+
+    public void onUlt(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            ultAtk = true;
+        else
+            ultAtk = false;
     }
 
     private void OnApplicationFocus(bool focus)
